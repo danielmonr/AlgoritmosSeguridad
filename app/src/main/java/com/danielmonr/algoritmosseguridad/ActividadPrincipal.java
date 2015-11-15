@@ -9,7 +9,7 @@ import android.view.View;
 import android.widget.Button;
 
 public class ActividadPrincipal extends ActionBarActivity implements View.OnClickListener{
-    private Button b_p;
+    private Button b_p, b_m;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +43,8 @@ public class ActividadPrincipal extends ActionBarActivity implements View.OnClic
     public void init(){
         b_p = (Button)findViewById(R.id.b_polybios);
         b_p.setOnClickListener(this);
+        b_m = (Button)findViewById(R.id.b_MD5);
+        b_m.setOnClickListener(this);
     }
 
     @Override
@@ -51,6 +53,9 @@ public class ActividadPrincipal extends ActionBarActivity implements View.OnClic
             case R.id.b_polybios:
                 poly();
                 break;
+            case R.id.b_MD5:
+                md5();
+                break;
             default:
                 break;
         }
@@ -58,6 +63,10 @@ public class ActividadPrincipal extends ActionBarActivity implements View.OnClic
 
     private void poly(){
         Intent intent = new Intent(this, Polybios.class);
+        startActivity(intent);
+    }
+    private void md5(){
+        Intent intent = new Intent(this, MD5.class);
         startActivity(intent);
     }
 }

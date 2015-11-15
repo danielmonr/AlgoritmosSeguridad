@@ -18,5 +18,13 @@
         android:layout_toRightOf="@+id/textView"
         android:layout_toEndOf="@+id/textView"
         android:layout_marginTop="98dp" />
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/b_MD5"
+        android:text="MD5"
+        android:layout_alignTop="@+id/b_polybios"
+        android:layout_toRightOf="@+id/b_polybios"
+        android:layout_toEndOf="@+id/b_polybios" />
 
 </RelativeLayout>

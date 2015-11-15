@@ -1,9 +1,14 @@
 package com.danielmonr.algoritmosseguridad;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+
+import java.nio.charset.StandardCharsets;
 
 public class MD5 extends ActionBarActivity {
 
@@ -40,12 +45,25 @@ public class MD5 extends ActionBarActivity {
     private final int I_B = (int) 0xEFCDAB89L;
     private final int I_C = (int) 0x98BADCFEL;
     private final int I_D = (int) 0x10325476;
-    private int l_bits_entrada;
+    private int l_bytes_entrada;
+    private int l_bytes;
+    private String ejemplo = "Este es un ejemplo";
 
-    public void algoritmo(){
-        String entrada = "Este es un ejemplo";
-        l_bits_entrada = entrada.length() * 8;
-
+    public void algoritmo(View view) {
+        byte[] entrada = ejemplo.getBytes();
+        l_bytes_entrada = entrada.length;
+        l_bytes = l_bytes_entrada + 8;
+        int numBlocks = (l_bytes >>> 6) + 1; //numero de bloques de 512 bits (64 bytes)
+        int total_l = numBlocks << 6;
+        byte[] bytes_colchon = new byte[total_l-l_bytes_entrada];
+        Log.d("NUMBLOCKS", Integer.toString(numBlocks));
+        Log.d("NUM_BYTES_Entrada", Integer.toString(l_bytes_entrada));
+        Log.d("NUM_BYTES_TOTAL", Integer.toString(total_l));
+        bytes_colchon[0] = (byte)0x80; // bit de extencion más 7 zeros
+        long l_bits = (long)l_bytes_entrada;
+        Log.d("L_BITS_ANTES", Long.toString(l_bits));
+        l_bits= l_bits << 3;
+        Log.d("L_BITS_Despues", Long.toString(l_bits));
     }
 
 
