@@ -1,0 +1,25 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context="com.danielmonr.algoritmosseguridad.Polybios">
+
+    <TextView android:text=" "
+        android:id="@+id/t_Solucion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true" />
+    <Button
+        android:text="Generar"
+        android:id="@+id/b_generar_pol"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/t_Solucion"
+        android:layout_toRightOf="@+id/t_Solucion"
+        android:layout_toEndOf="@+id/t_Solucion"
+        android:layout_marginTop="58dp"
+        android:onClick="Generar"/>
+
+</RelativeLayout>

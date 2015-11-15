@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">AlgoritmosSeguridad</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_polybios">Polybios</string>
+    <string name="title_activity_triple_des">TripleDES</string>
+    <string name="title_activity_md5">MD5</string>
+</resources>
