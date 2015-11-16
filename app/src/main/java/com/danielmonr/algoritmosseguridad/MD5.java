@@ -3,22 +3,32 @@ package com.danielmonr.algoritmosseguridad;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import java.nio.charset.StandardCharsets;
 
 public class MD5 extends ActionBarActivity {
     private String ejemplo;
+    private int[] explicaciones = {
+            R.string.MD5_explicacion_1, R.string.MD5_explicacion_2, R.string.MD5_explicacion_3, R.string.MD5_explicacion_4, R.string.MD5_explicacion_5
+    };
+    private int cont;
+    private TextView tv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_md5);
-        ejemplo = ((TextView)findViewById(R.id.tv_Solucion)).getText().toString();
+        tv = (TextView)findViewById(R.id.tv_explicacion);
+        tv.setMovementMethod(new ScrollingMovementMethod());
+        cont = 0;
     }
 
     @Override
@@ -44,8 +54,17 @@ public class MD5 extends ActionBarActivity {
     }
 
     public void Generar(View view){
-        TextView S = (TextView)findViewById(R.id.tv_Solucion);
+        TextView S = (TextView)findViewById(R.id.et_Solucion);
+        ejemplo = S.getText().toString();
         S.setText(algoritmo());
+    }
+
+    public void Siguiente(View view){
+        cont++;
+        if (cont < 5)
+            tv.setText(explicaciones[cont]);
+        else
+            ((Button)view).setClickable(false);
     }
 
     // BUFFER MD, palabras
@@ -227,6 +246,4 @@ public class MD5 extends ActionBarActivity {
         palabra = Y ^ (X | ~Z);
         return palabra;
     }
-
-
 }

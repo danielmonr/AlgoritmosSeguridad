@@ -7,4 +7,32 @@
     <string name="title_activity_polybios">Polybios</string>
     <string name="title_activity_triple_des">TripleDES</string>
     <string name="title_activity_md5">MD5</string>
+    <string name="MD5_explicacion_1">MD5 es un algoritmo criptográfico de reducción. Su longitud es de 128 bits representados en numeros hexadecimales.
+    MD5 fue un algoritmo muy usado a principios de los 90s. Hoy en día se le han encontrado muchas vulnerabilidades y se prefiere usar SHA2.\n\n
+    Arriba tenemos un texto a convertir en su hash MD5. Pulse Siguiente para ver una explicacion o Generar para ver el resultado final.</string>
+    <string name="MD5_explicacion_2">El primer paso es obtener un string de b bits. A este se le agregara un bit con valor 1, seguido de una cantidad N de bits 0. Siendo b + 1 + N igual a 448 modulo 512\n
+    Al resultado se le agregara un entero de 64 bits representando b.\n De esta forma obtenemos un a cantidad de bits multiplo de 512.</string>
+    <string name="MD5_explicacion_3">El siguiente paso es inizializar el buffer llamado MD:
+    palabra A: 0x67452301\n
+    palabra B: 0xefcdab89\n
+    palabra C: 0x98badcfe\n
+    palabra D: 0x10325476\n\n
+        Cada palabra tiene un longitud de 32 bits, generando un total de 128 bits.
+    </string>
+    <string name="MD5_explicacion_4">MD5 Utiliza 4 funciones, que se utlizaran en 4 rondas respectivamente.\n
+    F(X,Y,Z) = (XnY)u(¬XnZ)\n
+    G(X,Y,Z) = (XnZ)u(Yn¬Z)\n
+    H(X,Y,Z) = X ^ Y ^ Z\n
+    I(X,Y,Z) = Y ^ (Xu¬Z)\n
+    \nDónde n: AND, u: OR, ¬: NOT, ^: XOR\n
+    Se genera Una tabla T de 64 elementos, dónde el iesimo elemento es: T[i] = abs(sen(i)* 2^32</string>
+    <string name="MD5_explicacion_5">La cadena que obtuvimos en el primer paso se divide en bloques de 16 palabras, y se guardan en un arreglo X.\n
+    Por cada bloque de 512 bits se hace n las siguientes operaciones:\n
+        Donde [abcd k s i] Representa a = b + ((a + Funcion(b, c, d) + X[k] + T[i]) &lt;&lt;&lt; s)\n donde Funcion es F,G,H o I dependiendo de la ronda y &lt;&lt;&lt; es una rotacion a la izquierda.
+    Ronda1:\n[ABCD 0 7 1] [DABC  1 12  2] [CDAB  2 17  3] [BCDA  3 22  4]\n[ABCD  4  7  5] [DABC  5 12  6] [CDAB  6 17  7] [BCDA  7 22  8]\n[ABCD  8  7  9] [DABC  9 12 10] [CDAB 10 17 11] [BCDA 11 22 12]\n[ABCD 12  7 13] [DABC 13 12 14] [CDAB 14 17 15] [BCDA 15 22 16]\n \n
+        Ronda2:\n [ABCD  1  5 17] [DABC  6  9 18] [CDAB 11 14 19] [BCDA  0 20 20]\n[ABCD  5  5 21] [DABC 10  9 22] [CDAB 15 14 23] [BCDA  4 20 24]\n[ABCD  9  5 25] [DABC 14  9 26] [CDAB  3 14 27] [BCDA  8 20 28]\n[ABCD 13  5 29] [DABC  2  9 30] [CDAB  7 14 31] [BCDA 12 20 32]\n \n
+        Ronda3:\n [ABCD  5  4 33] [DABC  8 11 34] [CDAB 11 16 35] [BCDA 14 23 36]\n[ABCD  1  4 37] [DABC  4 11 38] [CDAB  7 16 39] [BCDA 10 23 40]\n[ABCD 13  4 41] [DABC  0 11 42] [CDAB  3 16 43] [BCDA  6 23 44]\n[ABCD  9  4 45] [DABC 12 11 46] [CDAB 15 16 47] [BCDA  2 23 48]\n \n
+        Ronda4:\n [ABCD  0  6 49] [DABC  7 10 50] [CDAB 14 15 51] [BCDA  5 21 52]\n[ABCD 12  6 53] [DABC  3 10 54] [CDAB 10 15 55] [BCDA  1 21 56]\n[ABCD  8  6 57] [DABC 15 10 58] [CDAB  6 15 59] [BCDA 13 21 60]\n[ABCD  4  6 61] [DABC 11 10 62] [CDAB  2 15 63] [BCDA  9 21 64]\n \n
+        Finalmente se suman los valores originales de A,B,C y D con sus nuevos valores.
+    </string>
 </resources>
