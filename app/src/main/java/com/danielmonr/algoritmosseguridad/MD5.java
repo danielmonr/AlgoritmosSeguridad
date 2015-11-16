@@ -12,11 +12,13 @@ import android.widget.TextView;
 import java.nio.charset.StandardCharsets;
 
 public class MD5 extends ActionBarActivity {
+    private String ejemplo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_md5);
+        ejemplo = ((TextView)findViewById(R.id.tv_Solucion)).getText().toString();
     }
 
     @Override
@@ -60,7 +62,6 @@ public class MD5 extends ActionBarActivity {
 
     private int l_bytes_entrada;
     private int l_bytes;
-    private String ejemplo = "a";
 
     //Tabla que se llena con el seno, y su inicializacion
     private static int[] T = new int [64];
