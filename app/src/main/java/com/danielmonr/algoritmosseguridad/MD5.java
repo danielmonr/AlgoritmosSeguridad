@@ -60,7 +60,7 @@ public class MD5 extends ActionBarActivity {
 
     private int l_bytes_entrada;
     private int l_bytes;
-    private String ejemplo = "Daniel";
+    private String ejemplo = "a";
 
     //Tabla que se llena con el seno, y su inicializacion
     private static int[] T = new int [64];
@@ -80,11 +80,12 @@ public class MD5 extends ActionBarActivity {
         bytes_colchon[0] = (byte)0x80; // bit de extencion más 7 zeros
         long l_bits = (long)l_bytes_entrada;
         l_bits= l_bits * 8;
+        Log.d("BYTES_ENTRADA", Integer.toString(l_bytes_entrada));
         // Ir acomodando los bytes de la longitud del mensaje al final del buffer
         for (int i = 0; i < 8; i++){
-            bytes_colchon[bytes_colchon.length - 8 +i] = (byte)l_bytes_entrada;
+            bytes_colchon[bytes_colchon.length - 8 +i] = (byte)l_bits;
             // recorrer de 8 bits (1 byte el numero, ya que se leen los últimos 8 bits al hacer el cast)
-            l_bytes_entrada >>>=8;
+            l_bits >>>=8;
         }
 
         // creacion de variables abcd
@@ -92,22 +93,30 @@ public class MD5 extends ActionBarActivity {
         int b = I_B;
         int c = I_C;
         int d = I_D;
+
         for (int i = 0; i < numBlocks; ++i){
+
             // Dividimos el bloque de 512 bits en palabras de 16 palabras de 32 bits
             int[] palabras = new int[16];
             int index = i*64;
             int index_colchon= 0;
+
             for(int j = 0; j < 64; ++j){
+
+                int indicediv4 = j /4;
+
                 if(j < l_bytes_entrada){
                     //palabras[j/4] <<= 8;
-                    palabras[j/4] = (palabras[j/4] >>>8) | (int)entrada[index];
+                    palabras[indicediv4] =  ((int)entrada[index] << 24) | (palabras[indicediv4] >>>8);
                     index++;
                 }
                 else{
                     //palabras[j/4] <<=8;
-                    palabras[j/4] = (palabras[j/4] >>>8)| (int)bytes_colchon[index_colchon];
-                    index_colchon++;
+                    palabras[indicediv4] =  ((int)bytes_colchon[index-l_bytes_entrada] << 24) | (palabras[indicediv4] >>>8);
+                    index++;
                 }
+
+
             }
 
             // Originales buffers del bloque:
@@ -115,6 +124,7 @@ public class MD5 extends ActionBarActivity {
             int O_B = b;
             int O_C = c;
             int O_D = d;
+
 
             int indice_t = 0;
             int v = 0;
@@ -169,43 +179,51 @@ public class MD5 extends ActionBarActivity {
             b += O_B;
             c += O_C;
             d += O_D;
+            Log.d("A", Integer.toString(a));
+            Log.d("B", Integer.toString(b));
+            Log.d("C", Integer.toString(c));
+            Log.d("D", Integer.toString(d));
         }
+
         // Se genera el hash MD5 con los buffers resultantes
         int cont = 0;
-        char[] MD5 = new char[16];
+        byte[] MD5 = new byte[16];
         for (int i = 0; i < 4; ++i){
             int numero = (i == 0)? a : ((i == 1)? b : ((i == 2)?c : d));
             for (int j = 0; j < 4; ++j){
-                MD5[cont] = (char)numero;
+                MD5[cont] = (byte)numero;
                 cont++;
                 numero >>>=8;
             }
         }
         String MD5S = "";
-        for(int i = 0; i < 16; ++i){
-            MD5S = MD5S + MD5[i];
+        StringBuilder sb = new StringBuilder();
+        for(int i = 0; i < MD5.length; ++i){
+            sb.append(String.format("%02X", MD5[i] & 0xFF));
         }
+        MD5S = sb.toString();
+
         return MD5S;
     }
 
     private int funcion_F(int X, int Y, int Z){
         int palabra;
-        palabra = (X&Y)|(~X&Z);
+        palabra = (X & Y) | (~X & Z);
         return palabra;
     }
     private int funcion_G(int X, int Y, int Z){
         int palabra;
-        palabra = (X&Z)|(Y&~Z);
+        palabra = ( X & Z) | (Y & ~Z);
         return palabra;
     }
     private int funcion_H(int X, int Y, int Z){
         int palabra;
-        palabra = X^Y^Z;
+        palabra = X ^ Y ^ Z;
         return palabra;
     }
     private int funcion_I(int X, int Y, int Z){
         int palabra;
-        palabra = Y^(X | ~Z);
+        palabra = Y ^ (X | ~Z);
         return palabra;
     }
 
