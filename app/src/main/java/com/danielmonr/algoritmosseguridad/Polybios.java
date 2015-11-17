@@ -7,18 +7,19 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import org.w3c.dom.Text;
 
 public class Polybios extends ActionBarActivity {
-    TextView tv;
+    EditText et;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_polybios);
-        tv = (TextView)findViewById(R.id.t_Solucion);
+        et = (EditText)findViewById(R.id.et_Solucion);
     }
 
     @Override
@@ -44,7 +45,7 @@ public class Polybios extends ActionBarActivity {
     }
 
     public void Generar(View view){
-       tv.setText(algoritmo());
+       et.setText(algoritmo());
     }
 
     public String algoritmo() {
