@@ -10,16 +10,21 @@
         android:id="@+id/t_Solucion"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true" />
+        android:layout_alignTop="@+id/b_generar_pol"
+        android:layout_alignBottom="@+id/b_generar_pol"
+        android:layout_toLeftOf="@+id/b_generar_pol"
+        android:layout_toStartOf="@+id/b_generar_pol"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        />
     <Button
         android:text="Generar"
         android:id="@+id/b_generar_pol"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/t_Solucion"
-        android:layout_toRightOf="@+id/t_Solucion"
-        android:layout_toEndOf="@+id/t_Solucion"
-        android:layout_marginTop="58dp"
-        android:onClick="Generar"/>
+        android:onClick="Generar"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 
 </RelativeLayout>
