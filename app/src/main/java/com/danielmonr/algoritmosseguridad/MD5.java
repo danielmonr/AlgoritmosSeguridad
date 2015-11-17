@@ -60,11 +60,22 @@ public class MD5 extends ActionBarActivity {
     }
 
     public void Siguiente(View view){
-        cont++;
-        if (cont < 5)
-            tv.setText(explicaciones[cont]);
+        if (cont < 4) {
+            tv.setText(explicaciones[++cont]);
+            ((Button)findViewById(R.id.b_anterior)).setClickable(true);
+        }
         else
             ((Button)view).setClickable(false);
+    }
+    public void Anterior(View view){
+        if(cont > 0) {
+            tv.setText(explicaciones[--cont]);
+            ((Button)findViewById(R.id.b_siguiente)).setClickable(true);
+        }
+        else{
+            ((Button)view).setClickable(false);
+        }
+
     }
 
     // BUFFER MD, palabras

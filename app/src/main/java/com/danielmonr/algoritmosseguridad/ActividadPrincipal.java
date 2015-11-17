@@ -6,10 +6,17 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListView;
 
-public class ActividadPrincipal extends ActionBarActivity implements View.OnClickListener{
+public class ActividadPrincipal extends ActionBarActivity  {
     private Button b_p, b_m;
+
+    private String[] algoritmos = {
+            "Polybios", "MD5"
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,25 +48,27 @@ public class ActividadPrincipal extends ActionBarActivity implements View.OnClic
     }
 
     public void init(){
-        b_p = (Button)findViewById(R.id.b_polybios);
-        b_p.setOnClickListener(this);
-        b_m = (Button)findViewById(R.id.b_MD5);
-        b_m.setOnClickListener(this);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, algoritmos);
+        ListView lv = (ListView)findViewById(R.id.lv_algoritmos);
+        lv.setAdapter(adapter);
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                switch (position){
+                    case 0:
+                        poly();
+                        break;
+                    case 1:
+                        md5();
+                        break;
+                    default:
+                        md5();
+                        break;
+                }
+            }
+        });
     }
 
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()){
-            case R.id.b_polybios:
-                poly();
-                break;
-            case R.id.b_MD5:
-                md5();
-                break;
-            default:
-                break;
-        }
-    }
 
     private void poly(){
         Intent intent = new Intent(this, Polybios.class);
@@ -69,4 +78,6 @@ public class ActividadPrincipal extends ActionBarActivity implements View.OnClic
         Intent intent = new Intent(this, MD5.class);
         startActivity(intent);
     }
+
 }
+
