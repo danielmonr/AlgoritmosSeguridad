@@ -28,6 +28,14 @@
             android:name=".MD5"
             android:label="@string/title_activity_md5" >
         </activity>
+        <activity
+            android:name=".SHA"
+            android:label="@string/title_activity_sh" >
+        </activity>
+        <activity
+            android:name=".RSA"
+            android:label="@string/title_activity_rs" >
+        </activity>
     </application>
 
 </manifest>

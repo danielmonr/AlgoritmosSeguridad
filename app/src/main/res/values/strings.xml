@@ -72,4 +72,6 @@
     Finalmente al resultado se le aplica una permutacion P de acuerdo a una tabla predefinida y se obtiene la cadena final de F ,de 32 bits.</string>
     <string name="TripDES_explicacion_6">Una vez hechas las 16 operaciones se concatenan R16L16 y se les aplica una última permutación IP-1.\n
     Para desencriptar siga los pasos anteriores a la inversa, aplicando las subllaves al revés.</string>
+    <string name="title_activity_sh">SHA</string>
+    <string name="title_activity_rs">RSA</string>
 </resources>
