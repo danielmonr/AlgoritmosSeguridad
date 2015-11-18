@@ -9,14 +9,14 @@
 
     <EditText
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:layout_height="40pt"
         android:id="@+id/et_Solucion_SHA"
         android:text="@string/MD5_ejemplo"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_toLeftOf="@+id/b_generar_sha"
-        android:layout_alignBottom="@+id/b_generar_sha"
         android:layout_alignTop="@+id/b_generar_sha"/>
 
     <Button

@@ -126,11 +126,11 @@
 </string>
 <string name="SHA_explicacion_4">
     Preprocesamiento\n
-    Primero agarramos el mensaje y lo pasamos a bits (l). Luego agregamos un 1 seguido de k '0' tal que (l+1+k)=896 mod 1024\n
+    Primero agarramos el mensaje y lo pasamos a bits (l). Luego agregamos un 1 seguido de k 0s tal que (l+1+k)=896 mod 1024\n
     Luego de esto en los siguientes 128 bits agregamos la longitud del mensaje original. Ejemplo.\n
-    La cadena "abc" en bits (01100001 01100010 01100011).\n
-    Se agrega un 1 seguido en este caso por 871 '0' para que se cumpla la condicion (l+1+k).\n
-    En los siguentes 128 bits se agrega la longitud de "abc" = 8 * 3 = 24 (00...0011000).\n
+    La cadena abc en bits (01100001 01100010 01100011).\n
+    Se agrega un 1 seguido en este caso por 871 0s para que se cumpla la condicion (l+1+k).\n
+    En los siguentes 128 bits se agrega la longitud de abc = 8 * 3 = 24 (00...0011000).\n
     01100001 01100010 01100011 1 000...000011000
 </string>
 <string name="SHA_explicacion_5">

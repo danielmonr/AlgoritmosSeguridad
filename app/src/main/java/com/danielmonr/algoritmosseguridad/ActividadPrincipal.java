@@ -92,10 +92,12 @@ public class ActividadPrincipal extends ActionBarActivity  {
         startActivity(intent);
     }
     private void Sha(){
-
+        Intent intent = new Intent(this, SHA.class);
+        startActivity(intent);
     }
     private void Rsa(){
-
+        Intent intent = new Intent(this, RSA.class);
+        startActivity(intent);
     }
 }
 
