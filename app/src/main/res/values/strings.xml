@@ -74,4 +74,87 @@
     Para desencriptar siga los pasos anteriores a la inversa, aplicando las subllaves al revés.</string>
     <string name="title_activity_sh">SHA</string>
     <string name="title_activity_rs">RSA</string>
+
+    <string name="RSA_explicacion_1">
+    RSA (Rivest, Shamir y Adleman) es un sistema criptográfico de clave pública desarrollado en 1977. Es el primer y más utilizado
+    algoritmo de este tipo y es válido tanto para cifrar como para firmar digitalmente.
+    La seguridad de este algoritmo radica en el problema de la factorización de números enteros. Los mensajes enviados se representan mediante números,
+    y el funcionamiento se basa en el producto. Actualmente estos primos son del orden de 10^{200}, y se prevé que su tamaño crezca con el aumento de
+    la capacidad de cálculo de los ordenadores.
+</string>
+<string name="RSA_explicacion_2">
+    Para empezar cada usuario elige dos números primos distintos p y q.estos números deben escogerse de forma aleatoria y deben tener una longitud en bits parecida.
+    Mientras mas grande sean los numeros mas seguro va a ser.
+</string>
+<string name="RSA_explicacion_3">
+    Se calculan los valores de n y phi.
+    n=p*q
+    phi=(p-1)(q-1)
+</string>
+<string name="RSA_explicacion_4">
+    Se escoge un entero positivo e\  menor que \varphi (n), que sea coprimo con \varphi (n).
+    Se calcula d mediante aritmetica modular, que es el multiplicador modular inverso de e mod varphi(n)\
+</string>
+<string name="RSA_explicacion_5">
+    Si Bob quiere mandarle un mensaja a Alicia:
+    Alicia comunica su clave pública (n,e) a Bob y guarda la clave privada en secreto.
+    Primero, Bob convierte M en un número entero m menor que n mediante un protocolo reversible acordado de antemano. Luego calcula el texto cifrado c mediante la operación
+    c = m^e mod(n).
+    Ahora Bob transmite c\  a Alicia.
+    Alicia para descifrar el mensaje de Bob usa su clave privada (d) mediante la operacion m = c^d mod(n).
+</string>
+<string name="SHA_explicacion_1">
+    La función de compresión de SHA-512 funciona con un bloque de mensaje de 1024 bits y un valor hash intermedio de 512 bits.
+    Se trata esencialmente de un algoritmo de cifrado de bloques de 512 bits que cifra el valor de hash intermedia utilizando el bloque de mensaje como clave.
+    El resultado es una cadena hash de longitud de 512 bits.
+</string>
+<string name="SHA_explicacion_2">
+    El valor inicial de hash H es la siguiente secuencia de palabras de 64 bits (que son obtenido mediante la adopción de las partes fraccionarias de las raíces cuadradas de los primeros ocho números primos):H(0)
+    H1 = 6a09e667f3bcc908\n
+    H2 = bb67ae8584caa73b\n
+    H3 = 3c6ef372fe94f82b\n
+    H4 = a54ff53a5f1d36f1\n
+    H5 = 510e527fade682d1\n
+    H6 = 9b05688c2b3e6c1f\n
+    H7 = 1f83d9abfb41bd6b\n
+    H8 = 5be0cd19137e2179\n
+</string>
+<string name="SHA_explicacion_3">
+    Se inicializa una secuencia k0 ... k79:\n
+    k = 428a2f98d728ae22 7137449123ef65cd b5c0fbcfec4d3b2f e9b5dba58189dbbc....\n
+    Estos valores corresponden a los sesenta y cuatro bits de las partes fraccionarias de las raíces cúbicas de los ochenta números primos.
+</string>
+<string name="SHA_explicacion_4">
+    Preprocesamiento\n
+    Primero agarramos el mensaje y lo pasamos a bits (l). Luego agregamos un 1 seguido de k '0' tal que (l+1+k)=896 mod 1024\n
+    Luego de esto en los siguientes 128 bits agregamos la longitud del mensaje original. Ejemplo.\n
+    La cadena "abc" en bits (01100001 01100010 01100011).\n
+    Se agrega un 1 seguido en este caso por 871 '0' para que se cumpla la condicion (l+1+k).\n
+    En los siguentes 128 bits se agrega la longitud de "abc" = 8 * 3 = 24 (00...0011000).\n
+    01100001 01100010 01100011 1 000...000011000
+</string>
+<string name="SHA_explicacion_5">
+    Se divide el mensaje de 1024 bits en 16 pequeños bloques de 64 bits(M1, M2, ... M16)\n
+    Por cada uno de los 16 bloques:\n
+        \tw[80]\n
+        \ta = H1, b = H2, c = H3, d = H4, e = H5, f = H6, g  = H7, h = H8\n
+        \tCh(x; y; z)=(x AND y)^(¬x AND z)\n
+        \tMaj(x; y; z)=(x AND y)^(x AND z)^(y AND z)\n
+        \tSum0(x) = S(x,28)^S(x,34)^S(x,39)\n
+        \tSum1(x) = S(x,14)^S(x,18)^S(x,41)\n
+        \tSigma0(x) = S(x,1)^S(x,8)^R(x,7)\n
+        \tSigma1(x) = S(x,19)^S(x,61)^R(x,6)\n
+        \tWj = Mj for j = 0 to 15\n\n
+        \tDónde AND:AND, ¬: NOT, ^: XOR, S:Right Rotate, R:Right Shift Rotate\n\n
+        \tFor j = 16 to 79\n
+            \t\tWj =Sigma1(W(j-2))+ W(j-7)+Sigma0(W(j-15))+W(j-16)\n
+        \tFor j = 0 to 79\n
+            \t\tT1 = h + Sum1(e) + Ch(e; f ; g) + Kj + Wj\n
+            \t\tT2 =Sum0(a) + Maj(a; b; c)\n
+            \t\th = g; g = f; f = e; e = d + T1; d = c; c = b; b = a; a = T1 + T2\n
+        \tH0 += a; H1 += b; H2 += c; H3 += d; H4 += e; H5 += f; H6 += g; H7 += h;\n
+</string>
+<string name="SHA_explicacion_6">
+</string>
+
 </resources>
