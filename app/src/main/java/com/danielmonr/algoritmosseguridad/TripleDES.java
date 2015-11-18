@@ -137,22 +137,23 @@ public class TripleDES extends ActionBarActivity {
         Log.d("C0", Integer.toBinaryString(c0).replace(' ', '0'));
         Log.d("D0", Integer.toBinaryString(d0).replace(' ', '0'));
         int mascara = 0x0fffffff;
+        Log.d ("Mascara", Integer.toBinaryString(mascara));
         int temp;
         int ctemp = c0;
         int dtemp = d0;
         for (int i = 0; i < 16; ++i){
             for (int j = 0; j < L_S[i]; ++j){
-                temp = ctemp >>> 27;
+                temp = ctemp & 0x8000000;
                 C[i] = ctemp << 1;
-                C[i] = (C[i] + temp) & mascara;
-                temp = dtemp >>> 27;
+                C[i] = (C[i] | temp) & mascara;
+                temp = dtemp & 0x8000000;
                 D[i] = dtemp << 1;
-                D[i] = (D[i] + temp) & mascara;
+                D[i] = (D[i] | temp) & mascara;
                 ctemp = C[i];
                 dtemp = D[i];
             }
         }
-        Log.d("C1", Integer.toBinaryString(C[0]));
+        Log.d("C3", Integer.toBinaryString(C[2]));
     }
 
     public void Feistel(byte[] b){
