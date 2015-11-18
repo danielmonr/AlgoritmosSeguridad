@@ -3,6 +3,7 @@ package com.danielmonr.algoritmosseguridad;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -15,7 +16,7 @@ public class ActividadPrincipal extends ActionBarActivity  {
     private Button b_p, b_m;
 
     private String[] algoritmos = {
-            "Polybios", "MD5"
+            "Polybios", "MD5", "3DES"
     };
 
     @Override
@@ -61,6 +62,9 @@ public class ActividadPrincipal extends ActionBarActivity  {
                     case 1:
                         md5();
                         break;
+                    case 2:
+                        Tdes();
+                        break;
                     default:
                         md5();
                         break;
@@ -68,7 +72,6 @@ public class ActividadPrincipal extends ActionBarActivity  {
             }
         });
     }
-
 
     private void poly(){
         Intent intent = new Intent(this, Polybios.class);
@@ -78,6 +81,9 @@ public class ActividadPrincipal extends ActionBarActivity  {
         Intent intent = new Intent(this, MD5.class);
         startActivity(intent);
     }
-
+    private void Tdes(){
+        Intent intent = new Intent(this, TripleDES.class);
+        startActivity(intent);
+    }
 }
 

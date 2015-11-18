@@ -22,6 +22,7 @@
         android:layout_height="wrap_content"
         android:text="Generar"
         android:id="@+id/b_generar_3des"
+        android:onClick="algoritmo"
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
