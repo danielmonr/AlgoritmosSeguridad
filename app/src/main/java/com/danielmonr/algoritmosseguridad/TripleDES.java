@@ -41,7 +41,7 @@ public class TripleDES extends ActionBarActivity {
     private byte[] kpls = new byte[7];
     private final int[] L_S = {1,1,2,2,2,2,2,2,1,2,2,2,2,2,2,1};
 
-    private int[] llaves = new int[16];
+    private long[] llaves = new long[16];
     private int[] C = new int [16];
     private int[] D = new int[16];
 
@@ -150,16 +150,26 @@ public class TripleDES extends ActionBarActivity {
                 dtemp = D[i];
             }
         }
+
         for (int i = 0; i < 48; i++){
-            int it = 0x8000000;
+            long it = 0x800000000000L;
             n_byte = PC_2[i] / 8;
-            n_bit = 8 -(PC_2[i] % 8);
+            long templ;
             for (int j = 0; j < 16; ++j){
+                templ = C[j] << 28;
+                //templ = templ | D[j];
+                /*
                 if (PC_2[i] > 28){
-                    llaves[j] = llaves[j] | (D[j] & it>>(PC_2[i] -28));
+                    llaves[j] = ((long)(llaves[j] | (D[j]>>(28-PC_2[i]-28)) & 1))<<i;
                 }
+                else {
+                    llaves[j] = ((long)(llaves[j] | (C[j]>>(28-PC_2[i])) & 1))<<i;
+                }
+                */
+                llaves[j] = templ;
             }
         }
+        Log.d("Llave C1D1", Long.toBinaryString(llaves[0]));
     }
 
     public void Feistel(byte[] b){

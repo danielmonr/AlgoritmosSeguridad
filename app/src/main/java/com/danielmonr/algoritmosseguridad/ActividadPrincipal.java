@@ -16,7 +16,7 @@ public class ActividadPrincipal extends ActionBarActivity  {
     private Button b_p, b_m;
 
     private String[] algoritmos = {
-            "Polybios", "MD5", "3DES"
+            "Polybios", "MD5", "3DES", "SHA2 - 512", "RSA"
     };
 
     @Override
@@ -65,6 +65,12 @@ public class ActividadPrincipal extends ActionBarActivity  {
                     case 2:
                         Tdes();
                         break;
+                    case 3:
+                        Sha();
+                        break;
+                    case 4:
+                        Rsa();
+                        break;
                     default:
                         md5();
                         break;
@@ -84,6 +90,12 @@ public class ActividadPrincipal extends ActionBarActivity  {
     private void Tdes(){
         Intent intent = new Intent(this, TripleDES.class);
         startActivity(intent);
+    }
+    private void Sha(){
+
+    }
+    private void Rsa(){
+
     }
 }
 
