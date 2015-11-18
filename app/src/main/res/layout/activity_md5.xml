@@ -9,7 +9,6 @@
     <EditText android:text="@string/MD5_ejemplo"
         android:textAppearance="?android:textAppearanceSmall"
         android:id="@+id/et_Solucion"
-        android:background="@drawable/back"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
@@ -47,7 +46,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Anterior"
+        android:text="@string/Anterior"
         android:onClick="Anterior"
         android:id="@+id/b_anterior"
         android:layout_alignParentBottom="true"
@@ -56,7 +55,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Siguiente"
+        android:text="@string/Siguiente"
         android:onClick="Siguiente"
         android:id="@+id/b_siguiente"
         android:layout_alignTop="@+id/b_anterior"

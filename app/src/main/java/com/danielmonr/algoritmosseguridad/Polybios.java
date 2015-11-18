@@ -2,6 +2,7 @@ package com.danielmonr.algoritmosseguridad;
 
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -14,12 +15,19 @@ import org.w3c.dom.Text;
 
 public class Polybios extends ActionBarActivity {
     EditText et;
+    TextView tv;
+    int contadorPaginas;
+    int[] Paginas = {R.string.Polybios_explicacion_1, R.string.Polybios_explicacion_2};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_polybios);
         et = (EditText)findViewById(R.id.et_Solucion);
+        tv = (TextView)findViewById(R.id.tv_explicacion_pol);
+        tv.setMovementMethod(new ScrollingMovementMethod());
+        contadorPaginas = 0;
+        setPagina();
     }
 
     @Override
@@ -42,6 +50,19 @@ public class Polybios extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void Anterior(View view){
+        contadorPaginas = (contadorPaginas >0)? contadorPaginas-1:0;
+        setPagina();
+    }
+    public void Siguiente(View view){
+        contadorPaginas = (contadorPaginas < 1)? contadorPaginas+1:1;
+        setPagina();
+    }
+
+    private void setPagina(){
+        tv.setText(Paginas[contadorPaginas]);
     }
 
     public void Generar(View view){

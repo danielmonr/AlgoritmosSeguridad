@@ -2,6 +2,8 @@
     <string name="app_name">AlgoritmosSeguridad</string>
 
     <string name="hello_world">Hello world!</string>
+    <string name="Anterior">&lt;</string>
+    <string name="Siguiente">&gt;</string>
     <string name="MD5_ejemplo">Daniel</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_polybios">Polybios</string>
@@ -35,4 +37,39 @@
         Ronda4:\n [ABCD  0  6 49] [DABC  7 10 50] [CDAB 14 15 51] [BCDA  5 21 52]\n[ABCD 12  6 53] [DABC  3 10 54] [CDAB 10 15 55] [BCDA  1 21 56]\n[ABCD  8  6 57] [DABC 15 10 58] [CDAB  6 15 59] [BCDA 13 21 60]\n[ABCD  4  6 61] [DABC 11 10 62] [CDAB  2 15 63] [BCDA  9 21 64]\n \n
         Finalmente se suman los valores originales de A,B,C y D con sus nuevos valores.
     </string>
+    <string name="Polybios_explicacion_1">Polybios es un cifrado por sustitución, de tipo simétrico.\n
+    En este caso la llave consiste de una tabla con los caractéres disponibles en la entrada, y los índices los caractéres utilizados para la salida.</string>
+    <string name="Polybios_explicacion_2">El cifrado consiste en localizar el caracter en la tabla y sustituirlo por la concatenación de sus índices.\n
+        Esto hace que la cadena de salida tenga una longitud igual al doble del de la entrada.</string>
+    <string name="TripDES_explicacion_1">El algoritmo 3DES es un tipo de cifrado por bloques. Es decir que la cadena de entrada se dividirá en bloques y el algoritmo se aplicará a cada bloque.\n
+    3DES es una variación de DES que se creó cuando este fue roto, y consiste en aplicar 3 operaciones DES.\n
+    1° Cifrado con una llave k1\n
+    2° Descifrado con una llave k2\n
+    3° Cifrado con una llave k3</string>
+    <string name="TripDES_explicacion_2">El cifrado DES utiliza llaves de 64 bits, aunque solo utiliza 56 de sus bits\n
+    El primer paso es la generación de las llaves:\n
+    La llave proporcionada se permuta con la ayuda de una tabla predefinida. (es decir que se ordenan los bits de acuerdo a un orden).\n
+    Esta llave se divide en dos generando dos bloques de 28 bits.\n
+    Estos nos ayudan a formar 16 llaves respectivamente, haciendoles una rotación a la izquierda de n elementos. n nos es dada en una tabla, de acuerdo a la iteración.</string>
+    <string name="TripDES_explicacion_3">Se juntan las llaves generadas por el bloque izquierdo con las del bloque derecho (C1D1, C2D2,...), y se ueden obtener las llaves finales haciendo las permutaciones dadas por una segunda tabla.\n
+    De esta forma obtenemos 16 subllaves de 48 bits cada una.</string>
+    <string name="TripDES_explicacion_4">En cuanto al mensaje en si, se le aplica una permutación inicial de acuerdo a la taba IP, a cada bloque de 64 bits.\n
+    Ese nuevo bloque se dividido en dos mitades de 32 bits cada uno L0 y R0\nuna vez dividido se procede a realizar 16 iteraciones de las siguientes operaciones:\n
+    Ln = R(n-1), Rn = L(n-1) XOR f(R(n-1)K1)\n
+    Siendo n inicial = 1; F una función definida que explicaremos a continuación.</string>
+    <string name="TripDES_explicacion_5">La función F:\n
+    F recibe dos parametros un bloque B de 32 bits, y una llave de 48 bits.\n
+    El primer paso es expandir B a 48 bits con una tabla de selección que repite algunos de los bits.\n
+    Después se le aplica un XOR al resultado con la llave.\n
+    De esta forma obtenemos una cadena de 48 bits, o 8 direcciones de 6 bits, que utilizamos para localizar bloques de 4 bits en Tablas llamadas Sboxes (8 SBs)\n
+    S1(B1)S2(B2)S3(B3)S4(B4)S5(B5)S6(B6)S7(B7)S8(B8)\n
+    El resultado es una cadena de 32 bits.\n
+    Las direcciones funcionan de la siguiente forma:\n
+    El primer y último bit se juntan y forman un numero i : 0&lt;= i &lt; 4,\n
+    i representa la fila\n
+    Los cutro bits de en medio genran j: 0&lt;= j &lt; 16\n
+    j reprensenta la columna.\n
+    Finalmente al resultado se le aplica una permutacion P de acuerdo a una tabla predefinida y se obtiene la cadena final de F ,de 32 bits.</string>
+    <string name="TripDES_explicacion_6">Una vez hechas las 16 operaciones se concatenan R16L16 y se les aplica una última permutación IP-1.\n
+    Para desencriptar siga los pasos anteriores a la inversa, aplicando las subllaves al revés.</string>
 </resources>
