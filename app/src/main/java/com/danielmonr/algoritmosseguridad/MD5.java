@@ -15,10 +15,10 @@ import android.widget.TextView;
 import java.nio.charset.StandardCharsets;
 
 public class MD5 extends ActionBarActivity {
+    private String MD5_ejemplos;
     private String ejemplo;
     private int[] explicaciones = {
-            R.string.MD5_explicacion_1, R.string.MD5_explicacion_2, R.string.MD5_explicacion_3, R.string.MD5_explicacion_4, R.string.MD5_explicacion_5
-    };
+            R.string.MD5_explicacion_1, R.string.MD5_explicacion_2, R.string.MD5_explicacion_3, R.string.MD5_explicacion_4, R.string.MD5_explicacion_5};
     private int cont;
     private TextView tv;
 
@@ -29,6 +29,9 @@ public class MD5 extends ActionBarActivity {
         tv = (TextView)findViewById(R.id.tv_explicacion);
         tv.setMovementMethod(new ScrollingMovementMethod());
         cont = 0;
+        TextView S = (TextView)findViewById(R.id.et_Solucion);
+        ejemplo = S.getText().toString();
+        algoritmo();
     }
 
     @Override
@@ -57,12 +60,21 @@ public class MD5 extends ActionBarActivity {
         TextView S = (TextView)findViewById(R.id.et_Solucion);
         ejemplo = S.getText().toString();
         S.setText(algoritmo());
+        if (cont == 5){
+            tv.setText(MD5_ejemplos);
+        }
     }
 
     public void Siguiente(View view){
-        if (cont < 4) {
-            tv.setText(explicaciones[++cont]);
-            ((Button)findViewById(R.id.b_anterior)).setClickable(true);
+        if (cont < 5) {
+            if (cont == 4) {
+                cont++;
+                tv.setText(MD5_ejemplos);
+            }
+            else {
+                tv.setText(explicaciones[++cont]);
+                ((Button) findViewById(R.id.b_anterior)).setClickable(true);
+            }
         }
         else
             ((Button)view).setClickable(false);
@@ -101,8 +113,18 @@ public class MD5 extends ActionBarActivity {
             T[i] = (int)(long)((1L<<32)* Math.abs(Math.sin(i+1)));
         }
     }
+
+    private void toEjemplo(byte[] b, String s){
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < b.length;++i){
+            sb.append(String.format("%02X", b[i] & 0xFF));
+        }
+        MD5_ejemplos += "\n" + s + sb.toString();
+    }
+
     public String algoritmo() {
         byte[] entrada = ejemplo.getBytes();
+        toEjemplo(entrada, "Entrada: ");
         l_bytes_entrada = entrada.length;
         l_bytes = l_bytes_entrada + 8;
         int numBlocks = (l_bytes >>> 6) + 1; //numero de bloques de 512 bits (64 bytes, 16 palabras de 32 bits)
@@ -119,6 +141,7 @@ public class MD5 extends ActionBarActivity {
             l_bits >>>=8;
         }
 
+        toEjemplo(bytes_colchon, "Bytes de padding y longitud: ");
         // creacion de variables abcd
         int a = I_A;
         int b = I_B;
@@ -168,6 +191,7 @@ public class MD5 extends ActionBarActivity {
                 c = b;
                 b = temp;
             }
+            MD5_ejemplos += "\nRonda1: " + "a= " + Integer.toHexString(a) + "\nb= " + Integer.toHexString(b) + "\nc= " + Integer.toHexString(c) + "\nd= " + Integer.toHexString(d);
             v = 0;
             int indice_buffer = 1;
             for(int j = 0; j < 16; ++j){
@@ -181,6 +205,7 @@ public class MD5 extends ActionBarActivity {
                 c = b;
                 b = temp;
             }
+            MD5_ejemplos += "\nRonda2: " + "a= " + Integer.toHexString(a) + "\nb= " + Integer.toHexString(b) + "\nc= " + Integer.toHexString(c) + "\nd= " + Integer.toHexString(d);
             indice_buffer = 5;
             for (int j = 0; j < 16; ++j){
                 int temp = b + Integer.rotateLeft((a+ funcion_H(b, c, d) + palabras[indice_buffer] + T[indice_t]), R3_v[v]);
@@ -193,6 +218,7 @@ public class MD5 extends ActionBarActivity {
                 c = b;
                 b = temp;
             }
+            MD5_ejemplos += "\nRonda3: " + "a= " + Integer.toHexString(a) + "\nb= " + Integer.toHexString(b) + "\nc= " + Integer.toHexString(c) + "\nd= " + Integer.toHexString(d);
             indice_buffer = 0;
             for (int j = 0; j < 16; ++j){
                 int temp = b + Integer.rotateLeft((a+ funcion_I(b, c, d) + palabras[indice_buffer] + T[indice_t]), R4_v[v]);
@@ -205,11 +231,13 @@ public class MD5 extends ActionBarActivity {
                 c = b;
                 b = temp;
             }
+            MD5_ejemplos += "\nRonda4: " + "a= " + Integer.toHexString(a) + "\nb= " + Integer.toHexString(b) + "\nc= " + Integer.toHexString(c) + "\nd= " + Integer.toHexString(d);
             // Una vez acabados los ciclos se suman las originales con las nuevas
             a += O_A;
             b += O_B;
             c += O_C;
             d += O_D;
+            MD5_ejemplos += "\nFinales: " + "a= " + Integer.toHexString(a) + "\nb= " + Integer.toHexString(b) + "\nc= " + Integer.toHexString(c) + "\nd= " + Integer.toHexString(d);
             Log.d("A", Integer.toString(a));
             Log.d("B", Integer.toString(b));
             Log.d("C", Integer.toString(c));
