@@ -11,6 +11,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 public class TripleDES extends ActionBarActivity {
+    String Trip_ejemplos = "";
     EditText et;
     TextView tv;
     int contadorPaginas;
@@ -25,6 +26,9 @@ public class TripleDES extends ActionBarActivity {
         tv.setMovementMethod(new ScrollingMovementMethod());
         contadorPaginas = 0;
         setPagina();
+        toEjemplo(key, "Llave 1= ");
+        toEjemplo(key2, "Llave 2= ");
+        toEjemplo(key, "Llave 3= ");
     }
 
     @Override
@@ -49,6 +53,13 @@ public class TripleDES extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    private void toEjemplo(byte[] b, String s){
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < b.length;++i){
+            sb.append(String.format("%02X", b[i] & 0xFF));
+        }
+        Trip_ejemplos += "\n" + s + sb.toString();
+    }
 
 
     private String ejemplo = "Daniel";
@@ -64,14 +75,21 @@ public class TripleDES extends ActionBarActivity {
         setPagina();
     }
     public void Siguiente(View view){
-        contadorPaginas = (contadorPaginas < 5)? contadorPaginas+1:5;
-        setPagina();
+        contadorPaginas = (contadorPaginas < 6)? contadorPaginas+1:6;
+        if(contadorPaginas == 6)
+            tv.setText(Trip_ejemplos);
+        else
+            setPagina();
     }
     private void setPagina(){
         tv.setText(Paginas[contadorPaginas]);
     }
 
     public void Generar(View view){
+        Trip_ejemplos = "";
+        toEjemplo(key, "Llave 1= ");
+        toEjemplo(key2, "Llave 2= ");
+        toEjemplo(key, "Llave 3= ");
         int extras = 0;
         ejemplo = et.getText().toString();
         if(ejemplo.length() % 8 != 0){
@@ -88,6 +106,8 @@ public class TripleDES extends ActionBarActivity {
             cadena[i] = zeros;
         }
 
+        toEjemplo(cadena, "Entrada = ");
+
         if( key.length == 7 ) {
             byte[] key8 = new byte[8];
             makeSMBKey( key, key8 );
@@ -96,6 +116,7 @@ public class TripleDES extends ActionBarActivity {
             setKey( key );
         }
         byte[] tempCiph = encrypt(cadena);
+        toEjemplo(tempCiph, "1 Encryptacion= ");
         if( key2.length == 7 ) {
             byte[] key8 = new byte[8];
             makeSMBKey( key, key8 );
@@ -104,6 +125,7 @@ public class TripleDES extends ActionBarActivity {
             setKey( key );
         }
         tempCiph = decrypt(tempCiph);
+        toEjemplo(tempCiph, "2 Desencryptacion= ");
         if( key.length == 7 ) {
             byte[] key8 = new byte[8];
             makeSMBKey( key, key8 );
@@ -112,6 +134,7 @@ public class TripleDES extends ActionBarActivity {
             setKey( key );
         }
         tempCiph = encrypt(cadena);
+        toEjemplo(tempCiph, "3 Encryptacion= ");
         StringBuilder sb = new StringBuilder(tempCiph.length);
         for(int i = 0; i < tempCiph.length; ++i){
             sb.append(String.format("%02X", tempCiph[i] & 0xFF));
@@ -119,6 +142,9 @@ public class TripleDES extends ActionBarActivity {
         ejemplo = sb.toString();
 
         et.setText(ejemplo);
+        if(contadorPaginas == 6){
+            tv.setText(Trip_ejemplos);
+        }
     }
 
 
@@ -331,7 +357,6 @@ public class TripleDES extends ActionBarActivity {
         int length = clearText.length;
 
         if (length % 8 != 0) {
-            System.out.println("Array must be a multiple of 8");
             Log.d("LENGTH_ARRAY", Integer.toString(length));
             return null;
         }
@@ -353,7 +378,6 @@ public class TripleDES extends ActionBarActivity {
         int length = cipherText.length;
 
         if (length % 8 != 0) {
-            System.out.println("Array must be a multiple of 8");
             return null;
         }
 

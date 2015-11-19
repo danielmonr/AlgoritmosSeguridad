@@ -15,7 +15,7 @@ import android.widget.TextView;
 import java.nio.charset.StandardCharsets;
 
 public class MD5 extends ActionBarActivity {
-    private String MD5_ejemplos;
+    private String MD5_ejemplos = "";
     private String ejemplo;
     private int[] explicaciones = {
             R.string.MD5_explicacion_1, R.string.MD5_explicacion_2, R.string.MD5_explicacion_3, R.string.MD5_explicacion_4, R.string.MD5_explicacion_5};
@@ -123,6 +123,7 @@ public class MD5 extends ActionBarActivity {
     }
 
     public String algoritmo() {
+        MD5_ejemplos = "";
         byte[] entrada = ejemplo.getBytes();
         toEjemplo(entrada, "Entrada: ");
         l_bytes_entrada = entrada.length;

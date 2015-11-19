@@ -10,6 +10,7 @@ import android.widget.TextView;
 import java.math.BigInteger;
 
 public class RSA extends ActionBarActivity {
+    private String Rsa_ejemplos = "";
     private EditText et;
     private TextView tv;
     int contadorPaginas;
@@ -31,14 +32,18 @@ public class RSA extends ActionBarActivity {
         setPagina();
     }
     public void Siguiente(View view){
-        contadorPaginas = (contadorPaginas < 4)? contadorPaginas+1:4;
-        setPagina();
+        contadorPaginas = (contadorPaginas < 5)? contadorPaginas+1:5;
+        if(contadorPaginas == 5)
+            tv.setText(Rsa_ejemplos);
+        else
+            setPagina();
     }
     private void setPagina(){
         tv.setText(Paginas[contadorPaginas]);
     }
 
     public void Generar(View view){
+        Rsa_ejemplos = "";
         String ejemplo = et.getText().toString();
         String[] encriptado = new String [ejemplo.length()];
         String encrypt = "";
@@ -50,8 +55,10 @@ public class RSA extends ActionBarActivity {
         phi = (p-1)*(q-1);
         e = 17;
         d = 2753;
+        Rsa_ejemplos += "p = " + Integer.toString(p) + "\nq = " + Integer.toString(q) + "\nn = " + Integer.toString(n) + "\nphi = " + Integer.toString(phi) + "\ne = " +Integer.toString(e) + "\nd = " +Integer.toString(d);
         for(int i = 0;i<ejemplo.length();i++){
             //System.out.println((int)ejemplo.charAt(i)+"^"+e+"mod"+n+"="+(int)Math.pow((int)ejemplo.charAt(i),e) % n);
+            Rsa_ejemplos += "\n" +((int)ejemplo.charAt(i)+"^"+e+"mod"+n+"="+(int)Math.pow((int)ejemplo.charAt(i),e) % n);
             BigInteger be = new BigInteger(String.valueOf(e));
             BigInteger bn = new BigInteger(String.valueOf(n));
             BigInteger bm = new BigInteger(String.valueOf((int)ejemplo.charAt(i)));
@@ -61,6 +68,8 @@ public class RSA extends ActionBarActivity {
             encrypt += encriptado[i] + '-';
         }
         et.setText(encrypt);
+        if(contadorPaginas == 5)
+            tv.setText(Rsa_ejemplos);
     }
 
 }

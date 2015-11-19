@@ -71,12 +71,11 @@ public class Polybios extends ActionBarActivity {
 
     public String algoritmo() {
         // Inicializacion de matriz de igualdades
-        char[][] matriz_igualdades = new char[15][15];
         int col = 0;
         int fil = 0;
         int i;
         // Valores aceptados: numeros, mayusculas y minusculas
-        String ejemplo = "Esto es un ejemplo";
+        String ejemplo = et.getText().toString();
         String S = "";
         char temp;
         for (i = 0; i < ejemplo.length(); ++i) {
