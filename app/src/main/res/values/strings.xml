@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">AlgoritmosSeguridad</string>
+    <string name="app_name">AlgoritmosCifrado</string>
 
     <string name="hello_world">Hello world!</string>
     <string name="Anterior">&lt;</string>

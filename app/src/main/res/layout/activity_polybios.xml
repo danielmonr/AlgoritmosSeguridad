@@ -33,6 +33,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/tv_explicacion_pol"
+        android:gravity="center|top"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/et_Solucion"
@@ -42,6 +43,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="@color/C_botones_atras_adelante"
         android:id="@+id/b_anterior_Pol"
         android:text="@string/Anterior"
         android:onClick="Anterior"
@@ -51,6 +53,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="@color/C_botones_atras_adelante"
         android:id="@+id/b_siguiente_Pol"
         android:onClick="Siguiente"
         android:text="@string/Siguiente"

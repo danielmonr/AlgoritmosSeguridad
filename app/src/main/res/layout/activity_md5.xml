@@ -46,6 +46,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="@color/C_botones_atras_adelante"
         android:text="@string/Anterior"
         android:onClick="Anterior"
         android:id="@+id/b_anterior"
@@ -55,6 +56,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="@color/C_botones_atras_adelante"
         android:text="@string/Siguiente"
         android:onClick="Siguiente"
         android:id="@+id/b_siguiente"

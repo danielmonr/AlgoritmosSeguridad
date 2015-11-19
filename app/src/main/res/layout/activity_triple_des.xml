@@ -26,10 +26,12 @@
         android:onClick="Generar"
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentEnd="true"
+        android:focusable="true" />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:gravity="center|top"
         android:scrollbars="vertical"
         android:layout_below="@+id/et_Solucion_3DES"
         android:id="@+id/tv_explicacion_3DES"
@@ -41,6 +43,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="@color/C_botones_atras_adelante"
         android:id="@+id/b_anterior_3DES"
         android:text="@string/Anterior"
         android:onClick="Anterior"
@@ -50,10 +53,11 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="@color/C_botones_atras_adelante"
         android:id="@+id/b_siguiente_3DES"
         android:onClick="Siguiente"
         android:text="@string/Siguiente"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"/>
+        android:layout_alignParentEnd="true" />
 </RelativeLayout>
