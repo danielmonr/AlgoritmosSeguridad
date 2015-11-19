@@ -53,6 +53,7 @@ public class TripleDES extends ActionBarActivity {
 
     private String ejemplo = "Daniel";
     private byte[] key = {(byte)0x13,(byte)0x34,(byte)0x57,(byte)0x79,(byte)0x9b,(byte)0xbc,(byte)0xdf,(byte)0xf1};
+    private byte[] key2 = {(byte)0x15,(byte)0x14,(byte)0x57,(byte)0x79,(byte)0x9a,(byte)0xac,(byte)0x8f,(byte)0xf0};
     private int[] encryptKeys = new int[32];
     private int[] decryptKeys = new int[32];
 
@@ -71,11 +72,20 @@ public class TripleDES extends ActionBarActivity {
     }
 
     public void Generar(View view){
+        int extras = 0;
         ejemplo = et.getText().toString();
+        if(ejemplo.length() % 8 != 0){
+            extras = 8 - (ejemplo.length() % 8);
+        }
+        byte zeros = 0x00;
+        Log.d("EXTRAS", Integer.toString(extras));
 
-        byte[] cadena = new byte[ejemplo.length()];
+        byte[] cadena = new byte[ejemplo.length() + extras];
         for(int i  = 0; i < ejemplo.length(); i++){
             cadena[i] = (byte)ejemplo.charAt(i);
+        }
+        for (int i = ejemplo.length(); i < (extras + ejemplo.length()); ++i){
+            cadena[i] = zeros;
         }
 
         if( key.length == 7 ) {
@@ -86,11 +96,28 @@ public class TripleDES extends ActionBarActivity {
             setKey( key );
         }
         byte[] tempCiph = encrypt(cadena);
-        StringBuilder sb = new StringBuilder();
+        if( key2.length == 7 ) {
+            byte[] key8 = new byte[8];
+            makeSMBKey( key, key8 );
+            setKey( key8 );
+        } else {
+            setKey( key );
+        }
+        tempCiph = decrypt(tempCiph);
+        if( key.length == 7 ) {
+            byte[] key8 = new byte[8];
+            makeSMBKey( key, key8 );
+            setKey( key8 );
+        } else {
+            setKey( key );
+        }
+        tempCiph = encrypt(cadena);
+        StringBuilder sb = new StringBuilder(tempCiph.length);
         for(int i = 0; i < tempCiph.length; ++i){
             sb.append(String.format("%02X", tempCiph[i] & 0xFF));
         }
         ejemplo = sb.toString();
+
         et.setText(ejemplo);
     }
 
@@ -305,6 +332,7 @@ public class TripleDES extends ActionBarActivity {
 
         if (length % 8 != 0) {
             System.out.println("Array must be a multiple of 8");
+            Log.d("LENGTH_ARRAY", Integer.toString(length));
             return null;
         }
 
